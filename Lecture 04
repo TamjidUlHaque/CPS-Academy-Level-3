@@ -1,0 +1,65 @@
+______________________________________Prime Factorization and Prime Factorization Using Harmonic Series_______________________________________
+
+*) Prime Factorization er mane holo kuno ekta number ke er prime factor gula diye prokash kora :-
+
+number = pow(2,p) + pow(3,q) + pow(5,r) + pow(7,s) + .........................[ General Representation of Prime Factorization ]
+
+Prothome sieve use kore shobgula prime number generate korar pore eder ke store kore tokhon stored array er upore traverse
+kore oi element diye vaag korar maddhome primeFactorize kora hoy kuno number er .
+
+___________________________________________________Template Code for Prime Factorization_____________________________________________________
+
+const int maxSize = 1e7+33 ;
+bitset<maxSize> isPrime ; 
+vector<int> primeNumbers ;
+void sieveOfEratosthenes(){
+    isPrime[0] = isPrime[1] = 0 ; isPrime[2] = 1 ;
+    for(int i = 3 ; i < maxSize ; i+=2) isPrime[i] = 1 ;
+    for(int i = 3 ; i*i < maxSize ; i += 2){
+        if(isPrime[i]){
+            for(int j = i*i ; j < maxSize ; j += i){
+                isPrime[j] = 0 ;
+            }
+        }
+    }
+    primeNumbers.pb(2) ;
+    for(int i = 3 ; i < maxSize ; i+=2) if(isPrime[i]) primeNumbers.pb(i) ;
+}
+
+vector<long long> primeFactorization(long long n) {
+    vector<long long> primeFactors;
+    for (auto prime : primeNumbers) {
+        if (1LL * prime * prime > n) break ;
+        while (n % prime == 0) {
+            primeFactors.push_back(prime) ;
+            n /= prime ;
+        }
+    }
+    if (n > 1) primeFactors.push_back(n) ;
+    return primeFactors ;
+}
+
+1 theke n porjonto total prime number thake approximately (sqrt(n)/log2(sqrt(n))) ta .
+Tahole n er primeFactorization korar jonne outer loop ta approax (sqrt(n)/log2(sqrt(n))) bar run korbe .
+Innerloop log2(n) bar run korbe . Ekhane 2 ta dhora hoyeche upperBound hishabe . Emnite bastobe complexity aro kom.
+Karon shob shomoy to kebol 2 dara vaag hobe na . Onno prime number gula diye o vaag hote pare . Tokhon complexity
+hobe log(n) base that prime number .
+
+Time Complexity of PrimeFactorization Code is : O( sqrt(n) / log2(sqrt(n)) + log2(n) ) ;
+
+--------------------------------------------------------------https://www.spoj.com/problems/MAIN12B/--------------------------------------------
+int query = 1 ;
+
+void IcpcDhakaRegionalist2025(){
+    ll n ; cin >> n ; set<ll> distincts ;
+    for(int i = 0 ; i < n ; i++){
+        ll x ; cin >> x ; 
+        if(x<maxSize){
+            if(isPrime[x]) {distincts.insert(x) ; continue ;}
+        }
+        primeFactorization(x,distincts) ;
+    }
+    cout << "Case #" << query << ": " << distincts.size() << sesh ;
+    for(auto divisors:distincts) cout << divisors << sesh ;
+    query++ ;
+}
