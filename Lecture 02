@@ -1,1 +1,10 @@
+_______________________________________________Compact and Concise Code for Sieve Of Eratosthenes_______________________________________________
 
+const int maxSize = 1e7+33 ; bitset<maxSize> isPrime ; vector<int> storePrimes ;
+void sieveOfEratosthenes(){
+    isPrime[2] = 1 ; storePrimes.pb(2) ;
+    for(int i = 3 ; i < maxSize ; i += 2) isPrime[i] = 1 ;
+    for(int i = 3 ; i * i < maxSize ; i += 2)
+        if(isPrime[i]) for(int j = i*i ; j < maxSize ; j += i) isPrime[j] = 0 ;
+    for(int i = 3 ; i < maxSize ; i++) if(isPrime[i]) storePrimes.pb(i) ;
+}
