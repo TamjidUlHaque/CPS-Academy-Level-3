@@ -110,11 +110,19 @@ int main(){
 
 _____________________________________________________________________Store Divisors of every number from 1 to n___________________________________________________________________
     int maxSize = 1e6+33 ;
+    int sumOfDivisors[maxSize] ;
     vector<int> storeDivisors[maxSize] ; // Globally Declare kore rakhte hobe .
+    
 
     for(int i = 1 ; i < maxSize ; i++){
         for(int j = i ; j < maxSize ; j+=i){
             storeDivisors[j].push_back(i) ;
+        }
+    }
+
+    for(int i = 1 ; i < maxSize ; i++){
+        for(int j = i ; j < maxSize ; j+=i){
+            sumOfDivisors[j] += i ;
         }
     }
 _______________________________________________X_______________________________________O________________________________________X_______________________________________________________
