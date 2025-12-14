@@ -8,3 +8,29 @@ void sieveOfEratosthenes(){
         if(isPrime[i]) for(int j = i*i ; j < maxSize ; j += i) isPrime[j] = 0 ;
     for(int i = 3 ; i < maxSize ; i++) if(isPrime[i]) storePrimes.pb(i) ;
 }
+
+
+_______________________________________________________https://www.spoj.com/problems/TDPRIMES/___________________________________________________
+
+
+#include <bits/stdc++.h>
+using namespace std ;
+
+const int maxSize = 1e8+3 ; bitset<maxSize> isPrime ; vector<int> storePrimes ;
+void sieveOfEratosthenes(){
+    isPrime[2] = 1 ; storePrimes.push_back(2) ;
+    for(int i = 3 ; i < maxSize ; i += 2) isPrime[i] = 1 ;
+    for(int i = 3 ; i * i < maxSize ; i += 2)
+        if(isPrime[i]) for(int j = i*i ; j < maxSize ; j += i) isPrime[j] = 0 ;
+    for(int i = 3 ; i < maxSize ; i++) if(isPrime[i]) storePrimes.push_back(i) ;
+}
+
+int main(){
+    sieveOfEratosthenes() ;
+
+    for(int i = 0 ; i < storePrimes.size() ; i+=100) cout << storePrimes[i] << '\n' ;
+
+    return 0 ;
+}
+
+__________________________________________X_______________________________O_____________________________X____________________________________
