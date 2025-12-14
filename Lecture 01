@@ -1,0 +1,82 @@
+______________________________________________________________________________Harmonic Series______________________________________________________________________________
+
+Harmonic series er upore vitti korei Sieve of Eratosthenes er logic ta likha hoy . Echara aro onek jayga te harmonic series er idea ta kaaj e laganu jay .
+
+Problem :- 1 theke n porjonto shobgula number er number of divisors ber korte hobe . Jekhane n er value dewa 1e7 . Amra normally je count of divisors ber kori
+tar complexity hocche O(sqrt(n)) . Tahole 1 theke n porjonto number er jonne complexity hobe O(n*sqrt(n)) . 
+
+Ei problem solve korar jonne amra jei technique ta use korbo tar naam holo contribution Technique . Ei technique er mul bishoy ta holo Proti ta divisor tar 
+multiple er kache giye bole ashbe je se tar divisor . Ekhane ekta freq array thakbe jar moddhe index gula oi number ke nirdesh korbe jei number er divisor
+count kortesi . Tahole jodi kuno number diye x bananu jay orthat i jodi x er divisor hoy tahole divisorCnt[x]++ kore dibo .
+
+for(int i = 1 ; i <= limit ; i++){
+    for(int j = i ; j <= limit ; j += i){
+        divisorCount[j]++ ;
+    }
+}
+
+Ei loop er ekhon complexity Calculate korte hobe . Ei loop er iteration songkha and limit er ekta shomporko toiri kori :-
+1) i == 1 , iteration == limit ,  2) i==2 , iteration == limit/2  , 3) i==3 , iteration == limit / 3 . 
+Er karon kuno ekta songkha jodi hoy num tahole 1 theke num porjonto k er total multiple ache floor(num/k) .
+Tarmane number of Total iteration = n * ( n/1 + n/2 + n/3 + n/4 + n/5 + ................+ n/(n-1) + 1 )
+
+
+________________________________________________________________CSES PROBLEMSET {Counting Divisors task 1713}_______________________________________________________________
+
+bool isPerfectSquare(ll n){
+    ll root = sqrt(n) ;
+    if(root*1LL*root==n) return true ;
+    return false ;
+}
+
+const int maxSize = 1e6+33 ;
+int dp[maxSize] ;
+
+void IcpcDhakaRegionalist2025(){
+    int n ; cin >> n ; 
+    if(dp[n]!=-1) cout << dp[n] << sesh ;
+    else{
+        int cnt = 0 ; 
+        for(int i = 1 ; i*i <= n ; i++){
+            if(n%i==0) cnt += 2 ;
+        }
+        if(isPerfectSquare(n)) cnt-- ;
+        dp[n] = cnt ;
+        cout << cnt << endl ;
+    }
+}
+
+int main(){
+    Bismillah() ;
+
+    memset(dp,-1,sizeof(dp)) ;
+
+    testloop IcpcDhakaRegionalist2025() ;
+
+    Alhamdulillah ;
+}
+
+_______________________________________________________________________SOLVED USING CONTRIBUTION TECHNIQUE_____________________________________________________________________
+
+const int maxSize = 1e6+33 ;
+int dp[maxSize] ;
+
+void IcpcDhakaRegionalist2025(){
+    int n ; cin >> n ; 
+    cout << dp[n] << sesh ;
+}
+
+int main(){
+    Bismillah() ;
+
+    for(int i = 1 ; i < maxSize ; i++){
+        for(int j = i ; j < maxSize ; j+=i){
+            dp[j]++ ;
+        }
+    }
+
+    testloop IcpcDhakaRegionalist2025() ;
+
+    Alhamdulillah ;
+}
+_______________________________________________X_______________________________________O________________________________________X_______________________________________________________
