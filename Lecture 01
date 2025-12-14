@@ -9,6 +9,8 @@ Ei problem solve korar jonne amra jei technique ta use korbo tar naam holo contr
 multiple er kache giye bole ashbe je se tar divisor . Ekhane ekta freq array thakbe jar moddhe index gula oi number ke nirdesh korbe jei number er divisor
 count kortesi . Tahole jodi kuno number diye x bananu jay orthat i jodi x er divisor hoy tahole divisorCnt[x]++ kore dibo .
 
+const int limit = 1e7 ;
+int divisorCount[limit] ;
 for(int i = 1 ; i <= limit ; i++){
     for(int j = i ; j <= limit ; j += i){
         divisorCount[j]++ ;
@@ -18,8 +20,12 @@ for(int i = 1 ; i <= limit ; i++){
 Ei loop er ekhon complexity Calculate korte hobe . Ei loop er iteration songkha and limit er ekta shomporko toiri kori :-
 1) i == 1 , iteration == limit ,  2) i==2 , iteration == limit/2  , 3) i==3 , iteration == limit / 3 . 
 Er karon kuno ekta songkha jodi hoy num tahole 1 theke num porjonto k er total multiple ache floor(num/k) .
-Tarmane number of Total iteration = n * ( n/1 + n/2 + n/3 + n/4 + n/5 + ................+ n/(n-1) + 1 )
+Tarmane number of Total iteration = ( n/1 + n/2 + n/3 + n/4 + n/5 + ................+ n/(n-1) + 1 )
+                                  = n * ( 1 + 1/2 + 1/3 + 1/4 + ..... + 1/n)  ==> n * ( ln(n) + gamma + 1 / 2*n - Epsilon(n) ) 
+                                  = n * ln(n)
 
+Harmoniic series ke lekha jay :- From 1 to limit , summation of all ( 1 / n ) . Er ekta value ache jar last er part gula chuto houwar karone
+ignore kora jay . Amra er value kebol ln(n) dhore calculate kori time complexity hishab korar shomoy .
 
 ________________________________________________________________CSES PROBLEMSET {Counting Divisors task 1713}_______________________________________________________________
 
@@ -79,4 +85,36 @@ int main(){
 
     Alhamdulillah ;
 }
+
+
+________________________________________________________________________Atcoder abc172_d { Sum of Divisors }_________________________________________________________________
+
+const int MXSZ = 10000003 ;
+int Arr[MXSZ] ;
+
+int main(){
+    Bismillah() ;
+    ll ans = 0 ;
+    for(int i = 1 ; i <= MXSZ ; ++i){
+        for(int j = i ; j <= MXSZ ; j+=i){
+            Arr[j]++ ;
+        }
+    }
+    int index ; cin >> index ;
+    for(int i = 1 ; i <= index;++i){
+        ans += (1LL* i * Arr[i]) ;
+    }
+    cout << ans << endl ;
+    Alhamdulillah(0);
+}
+
+_____________________________________________________________________Store Divisors of every number from 1 to n___________________________________________________________________
+    int maxSize = 1e5+3 ;
+    vector<int> storeDivisors[maxSize] ;
+
+    for(int i = 1 ; i < maxSize ; i++){
+        for(int j = i ; j < maxSize ; j+=i){
+            storeDivisors[j].push_back(i) ;
+        }
+    }
 _______________________________________________X_______________________________________O________________________________________X_______________________________________________________
