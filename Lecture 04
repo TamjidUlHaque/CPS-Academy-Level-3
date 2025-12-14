@@ -63,3 +63,15 @@ void IcpcDhakaRegionalist2025(){
     for(auto divisors:distincts) cout << divisors << sesh ;
     query++ ;
 }
+
+---------------------------------------------------------Prime Factorization Using Harmonic Series------------------------------------------
+
+for(auto prime:primeNumbers){
+    for(ll j = prime * prime ; j < maxSize ; j += prime){
+        primeFactors[j].pb(prime) ;
+    }
+}
+Prime Factorization of numbers from 1 till maxSize .
+
+Here the safe memory limit for maxSize is from 1e6 to 1e7 ; which is crucial to get AC in given time and memory limit .
+____________________________X______________________________O_______________________________X__________________________________________________
