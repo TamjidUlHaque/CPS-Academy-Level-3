@@ -109,8 +109,8 @@ int main(){
 }
 
 _____________________________________________________________________Store Divisors of every number from 1 to n___________________________________________________________________
-    int maxSize = 1e5+3 ;
-    vector<int> storeDivisors[maxSize] ;
+    int maxSize = 1e6+33 ;
+    vector<int> storeDivisors[maxSize] ; // Globally Declare kore rakhte hobe .
 
     for(int i = 1 ; i < maxSize ; i++){
         for(int j = i ; j < maxSize ; j+=i){
