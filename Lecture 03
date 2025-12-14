@@ -1,0 +1,77 @@
+_________________________________________________________https://vjudge.net/problem/UVA-543____________________________________________________
+
+void IcpcDhakaRegionalist2025(){
+    int n ; 
+    while(cin>>n){
+        bool flag = true ;
+        for(auto val:storePrimes){
+            if(n==0) return ;
+            int x = val ; int y = n - x ; 
+            if(y<2) break ;
+            if(isPrime[y]) {cout << n << " = " << x << " + " << y << sesh ; flag = false ; break ;}
+        }
+        if(flag) cout << "Goldbach's conjecture is wrong." << sesh ;
+    }
+}
+
+___________________________________________________https://codeforces.com/contest/776/problem/B________________________________________________
+
+void IcpcDhakaRegionalist2025(){
+    int n ; cin >> n ; 
+    if(n>2) cout << 2 << sesh ;
+    else cout << 1 << sesh ; 
+    for(int i = 1 ; i <= n ; i++){
+        if(isPrime[i+1]) cout << 1 << gap ;
+        else cout << 2 << gap ; 
+    }
+    cout << sesh ;
+}
+
+______________________________________________________https://www.spoj.com/problems/HS08PAUL/__________________________________________________
+
+const int maxSize = 1e7+33 ;
+int dp[maxSize] ;
+bitset<maxSize> isPrime ;
+
+void findPrimes(){
+    isPrime[2] = 1 ;
+    for(int i = 3 ; i < maxSize ; i += 2) isPrime[i] = 1 ;
+    for(int i = 3 ; i * i < maxSize ; i += 2){
+        if(isPrime[i]){
+            for(int j = i*i ; j < maxSize ; j += i){
+                isPrime[j] = 0 ;
+            }
+        } 
+    }
+}
+
+void IcpcDhakaRegionalist2025(){
+    int n ; cin >> n ; cout << dp[n] << '\n' ;
+}
+
+int main(){
+    memset(dp,0,sizeof(dp)) ;
+
+    findPrimes() ;
+
+    for(int i = 1 ; i < maxSize ; i++){
+        if(i*i*i*i>maxSize) break ;
+        for(int j = 1 ; j < maxSize ; j++){
+            int x = i*i*i*i + j*j ;
+            if(x>maxSize) break ;
+            if(isPrime[x]==1) dp[x] = 1 ;
+        }
+    }
+
+    for(int i = 2 ; i < maxSize-3 ; i++){
+        dp[i] += dp[i-1] ;
+    }
+
+    int testcase ; cin >> testcase ;
+
+    for(int i = 0 ; i < testcase ; i++) IcpcDhakaRegionalist2025() ;
+
+    return 0 ;
+}
+
+___________________________________X________________________________O_______________________________X__________________________________________
