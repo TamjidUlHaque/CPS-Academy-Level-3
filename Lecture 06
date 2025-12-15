@@ -57,7 +57,8 @@ korar maddhome amra O ( sqrt(n) ) time complexity te sumOfNoOfDivisor khuje ber 
 
     ll n ; cin >> n ; ll sumOfNoOfDivisor = 0 ;
     for(ll i = 1 ; i * i <= n ; i++){
-// Ekhane contribution of I er moddhe floor(n/k) add hocche ar i porjonto joto gula square number ache oi gular jonne pair nai bole oita minus kore dewa hocche .
+// Ekhane contribution of I er moddhe add kora hocche floor(n/k) . Karon 1 theke n projonto k er divisor songkha floor(n/k) .
+// Ekhane i subtract kora hocche karon (i-1) ta chuto pair er jonne already calculation sesh + i er square value ta 1 ta divisable pair prodan korbe.
         contributionOfI = (n/i) - i ;
         sumOfNoOfDivisor += contributionOfI ;
     }
