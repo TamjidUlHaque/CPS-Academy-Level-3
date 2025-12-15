@@ -1,0 +1,86 @@
+_______________________Finding_________________________________Greatest Common Divisor(GCD) & Least Common Multiple(LCM)_____________________using PrimeFactorization._________________________
+
+Jodi duita number ke utpadok e bisleshon kora hoy tahole duita duitar moddhe jei jei divisor common ache eder moddhe shorbonimno power niye 
+oi utpadok gula ke gun korle jei value pawa jabe ta holo gosagu ba GCD . Ar jodi common divisor gular highest power and uncommon shobgula divisor
+ke gun kori tahole jei songkha ta pawa jabe ta holo LCM ba losagu .
+
+n = power(2,7) * power(3,5) * power(5,2) * power(7,3) .
+m = power(2,4) * power(3,2) * power(7,4) * power(11,3) .
+
+Tahole GCD(n,m) = power(2,4) * power(3,2) * power(7,3) .
+LCM(n,m) = power(2,7) * power(3,5) * power(5,2) * power(7,4) * power(11,3) .
+
+______________________________________________________________________Finding Sum Of divisors(SOD) using PrimeFactorization_______________________________________________________________________
+
+Naive algorithm of finding sum of divisors works in O( n * ln(n) ) . If we want to find the the sum of Divisors from 1 to n we can find it using harmonic series 
+if n is less than the size of array we can declare . It means n should be less than or equal to the order of 1e7 .
+
+----------------------------------------------------------------------https://www.spoj.com/problems/DIVSUM/-----------------------------------------------------------------------------------
+
+const int maxSize = 5e5+33 ;
+ll sumOfDivisors[maxSize] ;
+void IcpcDhakaRegionalist2025(){
+    ll n ; cin >> n ; cout << sumOfDivisors[n]-n << sesh ;
+}
+
+int main(){
+    Bismillah()
+    for(ll i = 1 ; i < maxSize ; i++){
+        for(ll j = i ; j < maxSize ; j += i){
+            sumOfDivisors[j] += i ;
+        }
+    }
+    testloop IcpcDhakaRegionalist2025() ;
+    Alhamdulillah ;
+}
+------------------------------------------------------------------------https://www.spoj.com/problems/DIVSUM2/---------------------------------------------------------------------------------
+But if the n becomes big then the problem occures . In this problem the value of n could be upto 1e16 and the number of test case is given 500 . That means
+we have to solve this problem in a such complexity where the opeation in 1 second does not cross ( 1e8/500 = 2e5 ) Operations .
+
+Kintu ekhane sqrt(n) complexity teh 500 ta testcase er jonne value calculation korle total operation songkha hobe ( 1e4 * 500 = 5e6 ) .
+Tar mane holo amader ke aro valo kuno algorithm khuje ber korte hobe ei problem ta solve korar jonne . Prime factorization er maddhome sum of divisor
+ber korar complexity holo ( sqrt(n) / ln(sqrt(n)) ) = 5e5 ja order of 1e5 er . Tahole er maddhome answer ber korle oi answer constraints er moddhe
+thakbe and accepted hoye jabe .
+
+Jodi kuno ekta number er prime Factorization hoy 
+
+n = pow(2,3) * pow(3,1) * pow(5,2) tahole ei shongkha er jonne sum of divisor ber korar formula holo 
+
+sumOfDivisor = ( 2^0 + 2^1 + 2^2 + 2^3 ) * ( 3^0 + 3^1 ) * ( 5^0 + 5^1 + 5^2 ) .
+
+--------------------------------------------------------------------Solution of this problem in Code------------------------------------------------------------------------------------------
+
+const ll maxSize = 1e6+3 ; 
+bitset<maxSize> isPrime ;
+vector<ll> primeNumbers ;
+void sieveOfEratosthens(){
+    isPrime[0] = isPrime[1] = 0 ; isPrime[2] = 1 ;
+    for(ll i = 3 ; i < maxSize ; i += 2) isPrime[i] = 1 ;
+    for(ll i = 3 ; i*i < maxSize ; i += 2 ){
+        if(isPrime[i]){
+            for(ll j = i*i ; j < maxSize ; j += i){
+                isPrime[j] = 0 ;
+            }
+        }
+    }
+    primeNumbers.pb(2LL) ;
+    for(ll i = 3 ; i < maxSize ; i += 2){
+        if(isPrime[i]) primeNumbers.pb(i) ;
+    }
+}
+
+void IcpcDhakaRegionalist2025(){
+    ll n ; cin >> n ; ll sumOfDivisors = 1 ; ll x = n ;
+    for(auto val:primeNumbers){
+        if(val*val*1LL>n) break ;
+        if(n%val==0){
+            ll sum = 1 ; ll curr = 1 ;
+            while(n%val==0){
+                curr *= val ; sum += curr ; n /= val ;
+            }
+            sumOfDivisors *= sum ;
+        }
+    }
+    if(n>1) sumOfDivisors *= (n + 1) ;
+    cout << sumOfDivisors - x << sesh ;
+}
