@@ -1,0 +1,68 @@
+_____________________________________________________________________Divisor's Sumatory Function_____________________________________________________________________
+1) Time Complexity : O(n^2) ;
+
+int sumOfNoOfDivisor = 0 ;
+for(int i = 1 ; i <= n ; i++){
+    for(int j = 1 ; j <= i ; j++){
+        if(i%j==0) sumOfNoOfDivisor++ ;
+    }
+}
+__________________________________________X__________________________________O______________________________________X__________________________________________________
+
+2) Time Complexity :- O( n * ln(n) ) ;
+
+  int sumOfNoOfDivisor = 0 ;
+  for(int i = 1 ; i <= n ; i++){
+      for(int j = i ; j <= n ; j+=i){
+          sumOfNoOfDivisor++ ;
+      }
+  }
+__________________________________________X__________________________________O______________________________________X___________________________________________________
+
+3) Time Complexity :- O(n) 
+
+  int sumOfNoOfDivisor = 0 ;
+  for(int i = 1 ; i <= n ; i++){
+      sumOfNoOfDivisor += (number/i) ;
+  }
+
+__________________________________________X__________________________________O______________________________________X___________________________________________________
+
+4) Time Complexity :- O( n * ( sqrt(n)/ln(sqrt(n)) ) )
+void calculateDivisors(int i){
+  int noOfDivisors = 1 ;
+  for(auto prime:PrimeNumbers){
+      if(number%prime==0){
+          int cnt = 0 ;
+          while(number%prime==0){
+              number /= prime ; cnt++ ;
+          }
+          noOfDivisors *= (cnt+1) ;
+      }
+  }
+  if(n>1) noOfDivisors *= 2 ;
+  return noOfDivisors ;
+}
+
+  int sumOfNoOfDivisors = 0 ; 
+  for(int i = 1 ; i <= limit ; i++){
+    sumOfNoOfDivisors += calculateDivisors(i) ;
+  }
+
+__________________________________________________Final Approach : Using Divisable Pairs in O ( sqrt(n) ) Time complexity_____________________________________________________________
+
+Proti ta number er divisor ber korar shomoy je utpadok e bisleshon kora hoy oi bisleshon er moddhe kebol sqrt(n) * sqrt(n) e thake matro ekbar . Baki shokol pair gula 
+(a,b) and (b,a) akare repeat hoy . Ar amra jani unique divisor pawa jay square root of n porjonto . Erpore divisor er repeatation dekha jay . Tai ei property ta use
+korar maddhome amra O ( sqrt(n) ) time complexity te sumOfNoOfDivisor khuje ber korte pari .
+
+    ll n ; cin >> n ; ll sumOfNoOfDivisor = 0 ;
+    for(ll i = 1 ; i * i <= n ; i++){
+// Ekhane contribution of I er moddhe floor(n/k) add hocche ar i porjonto joto gula square number ache oi gular jonne pair nai bole oita minus kore dewa hocche .
+        contributionOfI = (n/i) - i ;
+        sumOfNoOfDivisor += contributionOfI ;
+    }
+    sumOfNoOfDivisor *= 2 ; // Because without square root , every element appers in pair.
+    ll squareNumbersInsideN = sqrt(n) ;
+    sumOfNoOfDivisor += squareNumbersInsideN ;
+    return sumOfNoOfDivisor ;
+_____________________________________________X________________________________________O______________________________________________X__________________________________________________
