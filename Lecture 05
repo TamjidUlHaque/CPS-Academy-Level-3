@@ -6,3 +6,134 @@ Kuno ekta number er number of divisor holo oi number er prime divisor er jei pow
 
 Normally number of divisor ber korte amra je loop chaliye iterate kori sqrt(n) porjonto oi algorithm er time complexity holo O(sqrt(n)) . Kintu prime factorization
 er maddhome number of divisor ber korle er complexity hoy O( sqrt(n) / log(sqrt(n)) ) . Onekta time complexity kome jay eivabe number of divisor ber korle .
+
+______________________________________________________Number of Divisors( Easy & Hard Versions )_________________________________________________
+----------------------------------------------https://www.hackerearth.com/problem/algorithm/number-of-divisors-14/------------------------------
+const int maxSize = 1e7+33 ;
+bitset<maxSize> isPrime ;
+vector<ll> primeNumbers ;
+
+void sieveOfEratosthenes(){
+    isPrime[2] = 1 ; isPrime[0] = isPrime[1] = 0 ;
+    for(int i = 3 ; i < maxSize ; i+=2) isPrime[i] = 1 ;
+    for(int i = 3 ; i * i < maxSize ; i+=2){
+        if(isPrime[i]){
+            for(int j = i*i ; j < maxSize ; j += i){
+                isPrime[j] = 0 ;
+            }
+        }
+    }
+    primeNumbers.pb(2LL) ;
+    for(ll i = 3 ; i < maxSize ; i+=2) if(isPrime[i]) primeNumbers.pb(i) ;
+}
+
+vector<pair<ll,ll>> PrimeFactors(ll n){
+    vector<pair<ll,ll>> storeFactors ;
+    for(int i = 0 ; i < primeNumbers.size() ; i++){
+        if(1LL*primeNumbers[i]*primeNumbers[i]>n) break ;
+        if(n%primeNumbers[i]==0){
+            ll cnt = 0 ;
+            while(n%primeNumbers[i]==0){
+                n /= primeNumbers[i] ; cnt++ ;
+            }
+            storeFactors.pb({primeNumbers[i],cnt}) ;
+        }
+    }
+    if(n>1) storeFactors.pb({n,1}) ;
+    return storeFactors ;
+}
+
+void IcpcDhakaRegionalist2025(){
+    ll n ; cin >> n ; ll ans = 1LL ; vector<pair<ll,ll>> temp = PrimeFactors(n) ;
+    for(int i = 0 ; i < temp.size() ; i++){
+        ans *= (temp[i].second+1) ;
+    }
+    cout << ans << sesh ;
+}
+
+
+
+int main(){
+    Bismillah() ;
+
+    sieveOfEratosthenes() ;
+
+    testloop IcpcDhakaRegionalist2025() ;
+
+    Alhamdulillah ;
+}
+
+-----------------------------------------------------------https://lightoj.com/problem/false-ordering-----------------------------------------------
+
+const int maxSize = 1e4+33 ;
+bitset<maxSize> isPrime ;
+vector<ll> primeNumbers ;
+
+void sieveOfEratosthenes(){
+    isPrime[2] = 1 ; isPrime[0] = isPrime[1] = 0 ;
+    for(int i = 3 ; i < maxSize ; i+=2) isPrime[i] = 1 ;
+    for(int i = 3 ; i * i < maxSize ; i+=2){
+        if(isPrime[i]){
+            for(int j = i*i ; j < maxSize ; j += i){
+                isPrime[j] = 0 ;
+            }
+        }
+    }
+    primeNumbers.pb(2LL) ;
+    for(ll i = 3 ; i < maxSize ; i+=2) if(isPrime[i]) primeNumbers.pb(i) ;
+}
+
+long long NumberOfDivisors(ll n){
+    ll divCnt = 1 ;
+    for(int i = 0 ; i < primeNumbers.size() ; i++){
+        if(1LL*primeNumbers[i]*primeNumbers[i]>n) break ;
+        if(n%primeNumbers[i]==0){
+            ll cnt = 0 ;
+            while(n%primeNumbers[i]==0){
+                n /= primeNumbers[i] ; cnt++ ;
+            }
+            divCnt *= (cnt+1) ;
+        }
+    }
+    if(n>1) divCnt *= 2 ;
+    return divCnt ;
+}
+
+vector<pair<ll,ll>> vec ;
+
+int kahini = 1 ;
+
+void IcpcDhakaRegionalist2025(){
+    ll n ; cin >> n ; 
+    ll ans = vec[n-1].S ;
+    cout << "Case " << kahini << ": " << ans << sesh ;
+    kahini++ ;
+}
+
+
+bool cmp(const pair<ll,ll> &p1 ,const pair<ll,ll> &p2){
+    if(p1.first != p2.first){
+        return (p1.first < p2.first) ;
+    }
+    return (p1.second > p2.second) ;
+}
+
+
+int main(){
+    Bismillah() ;
+
+    sieveOfEratosthenes() ;
+
+    for(ll i = 1 ; i <= 1000 ; i++){
+        ll y = NumberOfDivisors(i) ;
+        vec.pb({y,i}) ;
+    }
+
+    sort(vec.begin(),vec.end(),cmp) ;
+
+    testloop IcpcDhakaRegionalist2025() ;
+
+    Alhamdulillah ;
+}
+
+__________________________________________________X________________________________O_______________________________X_________________________________________
