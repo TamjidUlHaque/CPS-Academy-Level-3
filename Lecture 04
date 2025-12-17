@@ -67,7 +67,7 @@ void IcpcDhakaRegionalist2025(){
 ---------------------------------------------------------Prime Factorization Using Harmonic Series------------------------------------------
 
 for(auto prime:primeNumbers){
-    for(ll j = prime * prime ; j < maxSize ; j += prime){
+    for(ll j = prime ; j < maxSize ; j += prime){
         primeFactors[j].pb(prime) ;
     }
 }
